@@ -453,7 +453,7 @@ const Dashboard = ({ onBack, theme, toggleTheme }) => {
         // to avoid one-way audio conflicts caused by multiple mic capture.
         console.log("Telephony initialization sequence started...");
 
-        const res = await fetch('https://voice-call-scf4.onrender.com/api/twilio/token');
+        const res = await fetch('/api/twilio/token');
         const data = await res.json();
         
         if (!data.success) throw new Error('Token generation failed');

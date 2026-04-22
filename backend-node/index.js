@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
 const twilio = require('twilio');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -16,6 +17,9 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Serve frontend static files
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 // Mock Data
 const stats = {
@@ -166,9 +170,12 @@ app.post('/api/generate-report', async (req, res) => {
 
 // Dumb Responder - Minimal TwiML to bypass all logic
 app.all('/api/voice/test', (req, res) => {
-  console.log("🛠️  [DIAGNOSTIC] TEST ROUTE HIT!");
-  res.type('text/xml');
   res.send('<?xml version="1.0" encoding="UTF-8"?><Response><Say>Connection Test Successful.</Say></Response>');
+});
+
+// Catch-all route for SPA logic (must be last)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
 });
 
 app.listen(PORT, () => {

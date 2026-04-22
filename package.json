@@ -4,8 +4,8 @@
   "description": "Root proxy for Antigraviity monorepo deployment on Render",
   "scripts": {
     "start": "cd backend-node && node index.js",
-    "postinstall": "cd backend-node && npm install",
-    "build": "npm run postinstall",
+    "postinstall": "cd backend-node && npm install && cd ../frontend && npm install",
+    "build": "npm run postinstall && cd frontend && npm run build",
     "install-backend": "cd backend-node && npm install",
     "install-frontend": "cd frontend && npm install",
     "build-frontend": "cd frontend && npm run build"
