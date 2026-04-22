@@ -823,7 +823,7 @@ const Dashboard = ({ onBack, theme, toggleTheme }) => {
                 </div>
               </div>
               
-              <div className="dialer-layout" style={{display: 'flex', gap: '40px', marginTop: '20px'}}>
+              <div className="dialer-layout" style={{marginTop: '20px'}}>
                 <div className="dialpad-container" style={{flex: 1}}>
                   <div className="dial-input" style={{fontSize: '1.5rem', letterSpacing: '4px', marginBottom: '20px', padding: '15px', background: 'var(--bg-tertiary)', borderRadius: '12px', textAlign: 'center'}}>
                     {dialedNumber || 'ENTER NUMBER'}
@@ -1002,35 +1002,37 @@ const Dashboard = ({ onBack, theme, toggleTheme }) => {
                   <h4>Automated Leads Tracker</h4>
                   <div className="badge-prism iris">{isBatchActive ? `Processing ${currentLeadIndex + 1}/${batchLeads.length}` : 'Pending'}</div>
                 </div>
-                <table className="data-table" style={{marginTop: '20px'}}>
-                  <thead>
-                    <tr>
-                      <th>Customer Name</th>
-                      <th>Mobile Number</th>
-                      <th>Status</th>
-                      <th>Call Duration</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {batchLeads.map((lead, i) => (
-                      <tr key={i} style={{opacity: i < currentLeadIndex ? 0.5 : 1, background: i === currentLeadIndex ? 'var(--bg-tertiary)' : 'transparent'}}>
-                        <td style={{fontWeight: 600}}>{lead.name}</td>
-                        <td>{lead.mobile}</td>
-                        <td>
-                          <div className={`badge-prism ${
-                            i === currentLeadIndex ? 'iris pulse' : 
-                            i < currentLeadIndex ? 'emerald' : 'muted'
-                          }`}>
-                            {i === currentLeadIndex ? 'CALLING' : i < currentLeadIndex ? 'COMPLETED' : 'PENDING'}
-                          </div>
-                        </td>
-                        <td>{i === currentLeadIndex ? (callDuration + 's') : lead.duration}</td>
-                        <td><button className="btn-secondary" style={{padding: '4px 10px', fontSize: '0.7rem'}}>Details</button></td>
+                <div className="data-table-wrapper">
+                  <table className="data-table" style={{marginTop: '20px'}}>
+                    <thead>
+                      <tr>
+                        <th>Customer Name</th>
+                        <th>Mobile Number</th>
+                        <th>Status</th>
+                        <th>Call Duration</th>
+                        <th>Action</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
+                    </thead>
+                    <tbody>
+                      {batchLeads.map((lead, i) => (
+                        <tr key={i} style={{opacity: i < currentLeadIndex ? 0.5 : 1, background: i === currentLeadIndex ? 'var(--bg-tertiary)' : 'transparent'}}>
+                          <td style={{fontWeight: 600}}>{lead.name}</td>
+                          <td>{lead.mobile}</td>
+                          <td>
+                            <div className={`badge-prism ${
+                              i === currentLeadIndex ? 'iris pulse' : 
+                              i < currentLeadIndex ? 'emerald' : 'muted'
+                            }`}>
+                              {i === currentLeadIndex ? 'CALLING' : i < currentLeadIndex ? 'COMPLETED' : 'PENDING'}
+                            </div>
+                          </td>
+                          <td>{i === currentLeadIndex ? (callDuration + 's') : lead.duration}</td>
+                          <td><button className="btn-secondary" style={{padding: '4px 10px', fontSize: '0.7rem'}}>Details</button></td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
           </div>
@@ -1042,30 +1044,32 @@ const Dashboard = ({ onBack, theme, toggleTheme }) => {
               <h3>Interaction Archive</h3>
               <button className="btn-secondary">Export CSV</button>
             </div>
-            <table className="data-table" style={{marginTop: '20px'}}>
-              <thead>
-                <tr>
-                  <th>Timestamp</th>
-                  <th>ID</th>
-                  <th>Customer</th>
-                  <th>Outcome</th>
-                  <th>AI Summary</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {callLogs.map((row, i) => (
-                  <tr key={i}>
-                    <td>{row.time}</td>
-                    <td>{row.id}</td>
-                    <td style={{fontWeight: 600}}>{row.user}</td>
-                    <td><span className={`badge-prism ${row.out === 'Converted' ? 'emerald' : row.out === 'Follow-up' ? 'iris' : 'rose'}`}>{row.out}</span></td>
-                    <td className="subtext" style={{fontSize: '0.8rem'}}>{row.sum}</td>
-                    <td><button className="btn-secondary" style={{padding: '4px 10px', fontSize: '0.75rem'}}>View</button></td>
+            <div className="data-table-wrapper">
+              <table className="data-table" style={{marginTop: '20px'}}>
+                <thead>
+                  <tr>
+                    <th>Timestamp</th>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Outcome</th>
+                    <th>AI Summary</th>
+                    <th>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {callLogs.map((row, i) => (
+                    <tr key={i}>
+                      <td>{row.time}</td>
+                      <td>{row.id}</td>
+                      <td style={{fontWeight: 600}}>{row.user}</td>
+                      <td><span className={`badge-prism ${row.out === 'Converted' ? 'emerald' : row.out === 'Follow-up' ? 'iris' : 'rose'}`}>{row.out}</span></td>
+                      <td className="subtext" style={{fontSize: '0.8rem'}}>{row.sum}</td>
+                      <td><button className="btn-secondary" style={{padding: '4px 10px', fontSize: '0.75rem'}}>View</button></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
