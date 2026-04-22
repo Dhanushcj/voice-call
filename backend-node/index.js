@@ -32,6 +32,10 @@ const calls = [
 ];
 
 // Routes
+app.get('/', (req, res) => {
+  res.send('Antigraviity AI Telephony Backend - System Online 📡');
+});
+
 app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
   // Demo Credentials
@@ -117,7 +121,7 @@ app.all('/api/voice/outgoing', (req, res) => {
         record: 'record-from-answer' // Optional: helpful for debugging audio issues later
       });
       console.log(`[${requestId}] ☎️  Laying Bridge for Human-to-Human connection.`);
-      const publicBaseUrl = 'https://2bc10d393baa2e.lhr.life'; 
+      const publicBaseUrl = 'https://voice-call-scf4.onrender.com'; 
       dial.number({
         statusCallbackEvent: 'initiated ringing answered completed',
         statusCallback: `${publicBaseUrl}/api/voice/status`
