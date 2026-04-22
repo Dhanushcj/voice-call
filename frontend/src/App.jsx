@@ -825,10 +825,6 @@ const Dashboard = ({ onBack, theme, toggleTheme }) => {
               
               <div className="dialer-layout" style={{display: 'flex', gap: '40px', marginTop: '20px'}}>
                 <div className="dialpad-container" style={{flex: 1}}>
-                  <div style={{marginBottom: '15px', display: 'flex', gap: '8px'}}>
-                    <button onClick={() => setDialedNumber('9444667411')} className="badge-prism iris" style={{cursor: 'pointer', border: 'none', background: 'var(--bg-tertiary)'}}>TEST: 94446...</button>
-                    <button onClick={() => setDialedNumber('9894428677')} className="badge-prism iris" style={{cursor: 'pointer', border: 'none', background: 'var(--bg-tertiary)'}}>TEST: 98944...</button>
-                  </div>
                   <div className="dial-input" style={{fontSize: '1.5rem', letterSpacing: '4px', marginBottom: '20px', padding: '15px', background: 'var(--bg-tertiary)', borderRadius: '12px', textAlign: 'center'}}>
                     {dialedNumber || 'ENTER NUMBER'}
                   </div>
