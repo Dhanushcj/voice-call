@@ -175,7 +175,13 @@ app.all('/api/voice/test', (req, res) => {
 
 // Catch-all route for SPA logic (must be last)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist/index.html'));
+  const indexPath = path.join(__dirname, '../frontend/dist/index.html');
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error("SPA Error: index.html not found at", indexPath);
+      res.status(500).send("Frontend is still building or missing. Please try again in a few moments.");
+    }
+  });
 });
 
 app.listen(PORT, () => {
