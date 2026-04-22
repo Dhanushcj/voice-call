@@ -1,0 +1,14 @@
+{
+  "name": "antigraviity-root",
+  "version": "1.0.0",
+  "description": "Root proxy for Antigraviity monorepo deployment on Render",
+  "scripts": {
+    "start": "cd backend-node && node index.js",
+    "build": "cd backend-node && npm install",
+    "install-backend": "cd backend-node && npm install",
+    "install-frontend": "cd frontend && npm install",
+    "build-frontend": "cd frontend && npm run build"
+  },
+  "author": "",
+  "license": "ISC"
+}
