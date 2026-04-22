@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.log
+tunnel_output.txt
+new_tunnel_output.txt
+dist/
+.venv/
+__pycache__/
